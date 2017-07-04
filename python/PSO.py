@@ -17,7 +17,12 @@ class PSOclass:
             self.bestFitness = sys.maxsize
 
         def update_fitness(self):
-            self.fitness = 3.0 + pow(self.position[0],2) + pow(self.position[1],2)
+            # self.fitness = 3.0 + pow(self.position[0],2) + pow(self.position[1],2)
+            self.beale_func()
+
+        def beale_func(self):
+        	self.fitness = pow(1.5 - self.position[0] + self.position[0]*self.position[1],2)+pow(2.25-self.position[0]+self.position[0]*pow(self.position[1],2),2)+pow(2.625-self.position[0]+self.position[0]*pow(self.position[1],3),2)
+
 
         def disp_info(self):
             print('--\n Information of particle: ')
@@ -186,8 +191,8 @@ def main():
                 "c2":1.49445}
     pso_param.update(
         {"best_global_posi":np.zeros(pso_param["dim"]),
-         "minX":np.array([-100]*pso_param["dim"]),
-         "maxX":np.array([100]*pso_param["dim"])})
+         "minX":np.array([-4.5]*pso_param["dim"]),
+         "maxX":np.array([4.5]*pso_param["dim"])})
     pso_param.update(
          {"maxV":np.array([1.0*i/5 for i in pso_param["maxX"]]),
           "minV":np.array([-1.0*i/5 for i in pso_param["maxX"]])})
