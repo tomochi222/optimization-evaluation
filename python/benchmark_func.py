@@ -313,5 +313,48 @@ def main():
     benchmark_func = Matyas()
     benchmark_func.plot_2dimension()
 
+##### Class Levi function N.13 #####
+class LeviN13:
+    def __init__(self):
+        self.variable_num = 2
+        self.max_search_range = np.array([10,10])
+        self.min_search_range = np.array([-10,-10])
+        self.optimal_solution = np.array([1,1])
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = np.power(np.sin(3*np.pi*variables[0]),2)
+        tmp2 = np.power(variables[0]-1,2)*(1+np.power(np.sin(3*np.pi*variables[1]),2))
+        tmp3 = np.power(variables[1]-1,2)*(1+np.power(np.sin(2*np.pi*variables[1]),2))
+        return tmp1+tmp2+tmp3
+
+    def plot_2dimension(self):
+        if self.variable_num == 2:
+            x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
+            y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
+            X, Y = np.meshgrid(x,y)
+            Z = []
+            for xy_list in zip(X,Y):
+                z = []
+                for xy_input in zip(xy_list[0],xy_list[1]):
+                    z.append(self.get_func_val(np.array(xy_input)))
+                Z.append(z)
+            Z = np.array(Z)
+            fig = plt.figure()
+            ax = Axes3D(fig)
+            ax.plot_wireframe(X,Y,Z)
+            plt.show()
+        else:
+            print('This method only can use for 2 variables')
+
+def main():
+    benchmark_func = LeviN13()
+    benchmark_func.plot_2dimension()
+
 if __name__ == '__main__':
     main()
