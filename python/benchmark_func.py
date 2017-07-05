@@ -701,8 +701,61 @@ class DeJongsF4:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
+##### Class De Jong's function F5 #####
+class DeJongsF5:
+    def __init__(self):
+        self.variable_num = 25
+        self.max_search_range = np.array([65.536] * self.variable_num)
+        self.min_search_range = np.array([-65.536] * self.variable_num)
+        self.optimal_solution = np.array([-32.32]*self.variable_num)
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        A = np.zeros([2,25])
+        a = [-32,16,0,16,32]
+        A[0,:] = np.tile(a,(1,5))
+        tmp = []
+        for x in a:
+            tmp_list = [x]*5
+            tmp.extend(tmp_list)
+        A[1,:] = tmp
+
+        sum = 0
+        for i in range(self.variable_num):
+            a1i = A[0,i]
+            a2i = A[1,i]
+            term1 = i
+            term2 = np.power(variables[0]-a1i,6)
+            term3 = np.power(variables[1]-a2i,6)
+            new = 1/(term1+term2+term3)
+            sum += new
+        return 1/(0.002+sum)
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 1)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 1)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
 def main():
-    benchmark_func = DeJongsF3()
+    benchmark_func = DeJongsF5()
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
