@@ -625,8 +625,84 @@ class DeJongsF2(Rosenbrock):
     def __init__(self,variable_num):
         super().__init__(variable_num)
 
+##### Class De Jong's function F3 #####
+class DeJongsF3:
+    def __init__(self):
+        self.variable_num = 5
+        self.max_search_range = np.array([5.12] * self.variable_num)
+        self.min_search_range = np.array([-5.12] * self.variable_num)
+        self.optimal_solution = np.array([-5.12] * self.variable_num)
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = 0
+        for i in range(self.variable_num):
+        	tmp1 += np.floor(variables[i])
+        return tmp1
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
+##### Class De Jong's function F4 #####
+class DeJongsF4:
+    def __init__(self):
+        self.variable_num = 30
+        self.max_search_range = np.array([1.28] * self.variable_num)
+        self.min_search_range = np.array([-1.28] * self.variable_num)
+        self.optimal_solution = np.zeros([1,self.variable_num])
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = 0
+        for i in range(self.variable_num):
+        	tmp1 += (i+1)*np.power(variables[i],4)
+        return tmp1 + np.random.normal(0, 1)
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.1)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.1)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0,0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
 def main():
-    benchmark_func = DeJongsF2(2)
+    benchmark_func = DeJongsF3()
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
