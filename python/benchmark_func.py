@@ -834,8 +834,53 @@ class kTablet:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
+##### Class Five-well potential function #####
+class fiveWellPotential:
+    def __init__(self):
+        self.variable_num = 2
+        self.max_search_range = np.array([20] * self.variable_num)
+        self.min_search_range = np.array([-20] * self.variable_num)
+        self.optimal_solution = np.array([4.92,-9.89])
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = []
+        tmp1.append(1-1/(1+0.05*np.power(np.power(variables[0],2)+(variables[1]-10),2)))
+        tmp1.append(-1/(1+0.05*(np.power(variables[0]-10,2)+np.power(variables[1],2))))
+        tmp1.append(-1/(1+0.03*(np.power(variables[0]+10,2)+np.power(variables[1],2))))
+        tmp1.append(-1/(1+0.05*(np.power(variables[0]-5,2)+np.power(variables[1]+10,2))))
+        tmp1.append(-1/(1+0.1*(np.power(variables[0]+5,2)+np.power(variables[1]+10,2))))
+        tmp1_sum = 0
+        for x in tmp1:
+            tmp1_sum += x
+        tmp2 = 1+0.0001*np.power((np.power(variables[0],2)+np.power(variables[1],2)),1.2)
+        return tmp1_sum*tmp2
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
 def main():
-    benchmark_func = kTablet(2)
+    benchmark_func = fiveWellPotential()
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
