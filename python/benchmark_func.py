@@ -615,8 +615,18 @@ class StyblinskiTang:
         else:
             print('This method only can use for 2 variables')
 
+##### Class De Jong's function F1 #####
+class DeJongsF1(Sphere):
+    def __init__(self,variable_num):
+        super().__init__(variable_num)
+
+##### Class De Jong's function F2 #####
+class DeJongsF2(Rosenbrock):
+    def __init__(self,variable_num):
+        super().__init__(variable_num)
+
 def main():
-    benchmark_func = StyblinskiTang(2)
+    benchmark_func = DeJongsF2(2)
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
