@@ -388,8 +388,82 @@ class ThreeHumpCamel:
         else:
             print('This method only can use for 2 variables')
 
+##### Class Easom function #####
+class Easom:
+    def __init__(self):
+        self.variable_num = 2
+        self.max_search_range = np.array([100,100])
+        self.min_search_range = np.array([-100,-100])
+        self.optimal_solution = np.array([np.pi,np.pi])
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        return -1.0*np.cos(variables[0])*np.cos(variables[1])*np.exp(-(np.power(variables[0]-np.pi,2)+np.power(variables[1]-np.pi,2)))
+
+    def plot_2dimension(self):
+        if self.variable_num == 2:
+            x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
+            y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
+            X, Y = np.meshgrid(x,y)
+            Z = []
+            for xy_list in zip(X,Y):
+                z = []
+                for xy_input in zip(xy_list[0],xy_list[1]):
+                    z.append(self.get_func_val(np.array(xy_input)))
+                Z.append(z)
+            Z = np.array(Z)
+            fig = plt.figure()
+            ax = Axes3D(fig)
+            ax.plot_wireframe(X,Y,Z)
+            plt.show()
+        else:
+            print('This method only can use for 2 variables')
+
+##### Class Eggholder function #####
+class Eggholder:
+    def __init__(self):
+        self.variable_num = 2
+        self.max_search_range = np.array([512,512])
+        self.min_search_range = np.array([-512,-512])
+        self.optimal_solution = np.array([512,404.2319])
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = -(variables[1]+47)*np.sin(np.sqrt(np.absolute(variables[1]+variables[0]/2+47)))
+        tmp2 = -variables[0]*np.sin(np.sqrt(np.absolute(variables[0]-(variables[1]+47))))
+        return tmp1+tmp2
+
+    def plot_2dimension(self):
+        if self.variable_num == 2:
+            x = np.arange(self.min_search_range[0],self.max_search_range[0], 1)
+            y = np.arange(self.min_search_range[1],self.max_search_range[1], 1)
+            X, Y = np.meshgrid(x,y)
+            Z = []
+            for xy_list in zip(X,Y):
+                z = []
+                for xy_input in zip(xy_list[0],xy_list[1]):
+                    z.append(self.get_func_val(np.array(xy_input)))
+                Z.append(z)
+            Z = np.array(Z)
+            fig = plt.figure()
+            ax = Axes3D(fig)
+            ax.plot_wireframe(X,Y,Z)
+            plt.show()
+        else:
+            print('This method only can use for 2 variables')
+
 def main():
-    benchmark_func = ThreeHumpCamel()
+    benchmark_func = Eggholder()
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
