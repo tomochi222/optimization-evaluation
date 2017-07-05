@@ -14,6 +14,10 @@ class Ackley:
         self.max_search_range = 32.768
         self.min_search_range = -32.768
         self.optimal_solution = np.zeros((1,self.variable_num))
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -50,6 +54,10 @@ class Sphere:
         self.max_search_range = 1000 # nearly inf
         self.min_search_range = -1000 # nearly inf
         self.optimal_solution = np.zeros((1,self.variable_num))
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -86,6 +94,10 @@ class Rosenbrock:
         self.max_search_range = 5
         self.min_search_range = -5
         self.optimal_solution = np.ones((1,self.variable_num))
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -125,6 +137,10 @@ class Beale:
         self.max_search_range = 4.5
         self.min_search_range = -4.5
         self.optimal_solution = np.array([3,0.5])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -164,6 +180,10 @@ class GoldsteinPrice:
         self.max_search_range = 2
         self.min_search_range = -2
         self.optimal_solution = np.array([0,-1])
+        self.global_optimum_solution = 3
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -202,6 +222,10 @@ class Booth:
         self.max_search_range = 10
         self.min_search_range = -10
         self.optimal_solution = np.array([1,-3])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -240,6 +264,10 @@ class BukinN6:
         self.max_search_range = np.array([-5,3])
         self.min_search_range = np.array([-15,-3])
         self.optimal_solution = np.array([-10,1])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -278,6 +306,10 @@ class Matyas:
         self.max_search_range = np.array([10,10])
         self.min_search_range = np.array([-10,-10])
         self.optimal_solution = np.array([0,0])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -320,6 +352,10 @@ class LeviN13:
         self.max_search_range = np.array([10,10])
         self.min_search_range = np.array([-10,-10])
         self.optimal_solution = np.array([1,1])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -359,6 +395,10 @@ class ThreeHumpCamel:
         self.max_search_range = np.array([5,5])
         self.min_search_range = np.array([-5,-5])
         self.optimal_solution = np.array([0,0])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -395,6 +435,10 @@ class Easom:
         self.max_search_range = np.array([100,100])
         self.min_search_range = np.array([-100,-100])
         self.optimal_solution = np.array([np.pi,np.pi])
+        self.global_optimum_solution = -1
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -431,6 +475,10 @@ class Eggholder:
         self.max_search_range = np.array([512,512])
         self.min_search_range = np.array([-512,-512])
         self.optimal_solution = np.array([512,404.2319])
+        self.global_optimum_solution = -959.6407
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -469,6 +517,10 @@ class McCormick:
         self.max_search_range = np.array([4,4])
         self.min_search_range = np.array([-1.5,-3])
         self.optimal_solution = np.array([-0.54719,-1.54719])
+        self.global_optimum_solution = -1.9133
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -507,6 +559,10 @@ class SchafferN2:
         self.max_search_range = np.array([100,100])
         self.min_search_range = np.array([-100,-100])
         self.optimal_solution = np.array([0,0])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -545,6 +601,10 @@ class SchafferN4:
         self.max_search_range = np.array([100,100])
         self.min_search_range = np.array([-100,-100])
         self.optimal_solution = np.array([0,1.25313])
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -583,6 +643,10 @@ class StyblinskiTang:
         self.max_search_range = np.array([5] * variable_num)
         self.min_search_range = np.array([-5] * variable_num)
         self.optimal_solution = np.array([-2.903534] * variable_num)
+        self.global_optimum_solution = -39.166165*self.variable_num
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -632,6 +696,10 @@ class DeJongsF3:
         self.max_search_range = np.array([5.12] * self.variable_num)
         self.min_search_range = np.array([-5.12] * self.variable_num)
         self.optimal_solution = np.array([-5.12] * self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -670,6 +738,10 @@ class DeJongsF4:
         self.max_search_range = np.array([1.28] * self.variable_num)
         self.min_search_range = np.array([-1.28] * self.variable_num)
         self.optimal_solution = np.zeros([1,self.variable_num])
+        self.global_optimum_solution = np.random.normal(0,1)
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -708,6 +780,10 @@ class DeJongsF5:
         self.max_search_range = np.array([65.536] * self.variable_num)
         self.min_search_range = np.array([-65.536] * self.variable_num)
         self.optimal_solution = np.array([-32.32]*self.variable_num)
+        self.global_optimum_solution = 1
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -761,6 +837,10 @@ class Ellipsoid:
         self.max_search_range = np.array([5.12] * self.variable_num)
         self.min_search_range = np.array([-5.12] * self.variable_num)
         self.optimal_solution = np.array([0]*self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -799,6 +879,10 @@ class kTablet:
         self.max_search_range = np.array([5.12] * self.variable_num)
         self.min_search_range = np.array([-5.12] * self.variable_num)
         self.optimal_solution = np.array([0]*self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -835,12 +919,17 @@ class kTablet:
         plt.show()
 
 ##### Class Five-well potential function #####
+# Not yet checked to do working properly
 class fiveWellPotential:
     def __init__(self):
         self.variable_num = 2
         self.max_search_range = np.array([20] * self.variable_num)
         self.min_search_range = np.array([-20] * self.variable_num)
         self.optimal_solution = np.array([4.92,-9.89])
+        self.global_optimum_solution = -1.4616
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -886,6 +975,10 @@ class weightedSphere:
         self.max_search_range = np.array([5.12] * self.variable_num)
         self.min_search_range = np.array([-5.12] * self.variable_num)
         self.optimal_solution = np.array([0] * self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -928,6 +1021,10 @@ class sumOfDifferentPower:
         self.max_search_range = np.array([1] * self.variable_num)
         self.min_search_range = np.array([-1] * self.variable_num)
         self.optimal_solution = np.array([0] * self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -966,6 +1063,10 @@ class griewank:
         self.max_search_range = np.array([600] * self.variable_num)
         self.min_search_range = np.array([-600] * self.variable_num)
         self.optimal_solution = np.array([0] * self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1006,6 +1107,10 @@ class michalewicz:
         self.max_search_range = np.array([np.pi] * self.variable_num)
         self.min_search_range = np.array([0] * self.variable_num)
         self.optimal_solution = np.array([0] * self.variable_num)
+        self.global_optimum_solution = -1.8013 # In case of variable_num == 2
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     # def get_optimal_solution(self):
     #     return self.optimal_solution
@@ -1049,6 +1154,10 @@ class perm:
         for i in range(self.variable_num):
             tmp.append(1/(i+1))
         self.optimal_solution = np.array(tmp)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1091,6 +1200,10 @@ class rastrigin:
         self.max_search_range = np.array([5.12] * self.variable_num)
         self.min_search_range = np.array([-5.12] * self.variable_num)
         self.optimal_solution = np.array([0] * self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1130,6 +1243,10 @@ class schwefel:
         self.max_search_range = np.array([500] * self.variable_num)
         self.min_search_range = np.array([-500] * self.variable_num)
         self.optimal_solution = np.array([420.9687] * self.variable_num)
+        self.global_optimum_solution = -418.9829*self.variable_num
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1167,7 +1284,11 @@ class sixHumpCamel:
         self.variable_num = 2
         self.max_search_range = np.array([3,2])
         self.min_search_range = np.array([-3,-2])
-        self.optimal_solution = np.array([0.0898])
+        self.optimal_solution = np.array([-0.0898,0.7126])
+        self.global_optimum_solution = -1.0316
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1203,6 +1324,10 @@ class shuberts:
         self.max_search_range = np.array([1000,10]) # Set infinite as 1000 for x1
         self.min_search_range = np.array([-10,-1000]) # Set infinite as -1000 for x2
         self.optimal_solution = np.array([0,0]) # Not yet implemented
+        self.global_optimum_solution = -186.7309
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1244,6 +1369,10 @@ class xinSheYang:
         self.max_search_range = np.array([2*np.pi]*self.variable_num) # Set infinite as 1000 for x1
         self.min_search_range = np.array([-2*np.pi]*self.variable_num) # Set infinite as -1000 for x2
         self.optimal_solution = np.array([0]*self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
@@ -1284,6 +1413,10 @@ class zakharov:
         self.max_search_range = np.array([1000]*self.variable_num) # temporarily set as 1000
         self.min_search_range = np.array([-1000]*self.variable_num) # temporarily set as -1000
         self.optimal_solution = np.array([0]*self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_global_optimum_solution(self):
+        return self.global_optimum_solution
 
     def get_optimal_solution(self):
         return self.optimal_solution
