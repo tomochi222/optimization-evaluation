@@ -959,8 +959,48 @@ class sumOfDifferentPower:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
+##### Class Griewank function #####
+class griewank:
+    def __init__(self,variable_num):
+        self.variable_num = variable_num
+        self.max_search_range = np.array([600] * self.variable_num)
+        self.min_search_range = np.array([-600] * self.variable_num)
+        self.optimal_solution = np.array([0] * self.variable_num)
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = 0
+        tmp2 = 1
+        for i in range(self.variable_num):
+            tmp1 += np.power(variables[i],2)
+            tmp2 = tmp2*np.cos(variables[i]/np.sqrt(i+1))
+        return tmp1/4000-tmp2
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 10)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 10)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
 def main():
-    benchmark_func = sumOfDifferentPower(10)
+    benchmark_func = griewank(10)
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
