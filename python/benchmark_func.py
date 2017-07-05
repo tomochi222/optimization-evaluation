@@ -1196,8 +1196,49 @@ class sixHumpCamel:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
+##### Class Shuberts function #####
+class shuberts:
+    def __init__(self):
+        self.variable_num = 2
+        self.max_search_range = np.array([1000,10]) # Set infinite as 1000 for x1
+        self.min_search_range = np.array([-10,-1000]) # Set infinite as -1000 for x2
+        self.optimal_solution = np.array([0,0]) # Not yet implemented
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        n = 5
+        tmp1 = 0
+        tmp2 = 0
+        for i in range(n):
+            tmp1 += (i+1)*np.cos((i+1)+(i+2)*variables[0])
+            tmp2 += (i+1)*np.cos((i+1)+(i+2)*variables[1])
+        return tmp1*tmp2
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 10)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 10)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
 def main():
-    benchmark_func = sixHumpCamel()
+    benchmark_func = shuberts()
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
