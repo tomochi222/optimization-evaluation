@@ -1038,8 +1038,54 @@ class michalewicz:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
+##### Class Perm function #####
+class perm:
+    def __init__(self,variable_num,beta):
+        self.variable_num = variable_num
+        self.beta = beta
+        self.max_search_range = np.array([1] * self.variable_num)
+        self.min_search_range = np.array([-1] * self.variable_num)
+        tmp = []
+        for i in range(self.variable_num):
+            tmp.append(1/(i+1))
+        self.optimal_solution = np.array(tmp)
+
+    def get_optimal_solution(self):
+        return self.optimal_solution
+
+    def get_search_range(self):
+        return [self.max_search_range, self.min_search_range]
+
+    def get_func_val(self, variables):
+        tmp1 = 0
+        tmp2 = 0
+        for j in range(self.variable_num):
+            for i in range(self.variable_num):
+                tmp1 += (i+1+self.beta)*(np.power(variables[i],j+1)-np.power(1/(i+1),j+1))
+            tmp2 += np.power(tmp1,2)
+            tmp1 = 0
+        return tmp2
+
+    def plot_2dimension(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.1)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.1)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(tmp))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
 def main():
-    benchmark_func = michalewicz(10)
+    benchmark_func = perm(10,1.6)
     benchmark_func.plot_2dimension()
 
 if __name__ == '__main__':
