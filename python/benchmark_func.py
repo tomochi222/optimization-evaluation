@@ -1449,10 +1449,3 @@ class zakharov:
         ax = Axes3D(fig)
         ax.plot_wireframe(X,Y,Z)
         plt.show()
-
-def main():
-    benchmark_func = zakharov(10)
-    benchmark_func.plot_2dimension()
-
-if __name__ == '__main__':
-    main()
