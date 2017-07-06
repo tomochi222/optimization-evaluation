@@ -6,6 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+__all__ = []
+
 ##### Optimization benchmark function group #####
 ##### Class Ackley function #####
 class Ackley:
@@ -873,7 +875,7 @@ class Ellipsoid:
         plt.show()
 
 ##### Class k-tablet function #####
-class kTablet:
+class KTablet:
     def __init__(self,variable_num):
         self.variable_num =variable_num
         self.max_search_range = np.array([5.12] * self.variable_num)
@@ -920,7 +922,7 @@ class kTablet:
 
 ##### Class Five-well potential function #####
 # Not yet checked to do working properly
-class fiveWellPotential:
+class FiveWellPotential:
     def __init__(self):
         self.variable_num = 2
         self.max_search_range = np.array([20] * self.variable_num)
@@ -969,7 +971,7 @@ class fiveWellPotential:
         plt.show()
 
 ##### Class Weighted Sphere function or hyper ellipsodic function #####
-class weightedSphere:
+class WeightedSphere:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([5.12] * self.variable_num)
@@ -1010,12 +1012,12 @@ class weightedSphere:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
-class hyperEllipsodic(weightedSphere):
+class HyperEllipsodic(weightedSphere):
     def __init__(self,variable_num):
         super().__init__(variable_num)
 
 ##### Class Sum of different power function #####
-class sumOfDifferentPower:
+class SumOfDifferentPower:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([1] * self.variable_num)
@@ -1057,7 +1059,7 @@ class sumOfDifferentPower:
         plt.show()
 
 ##### Class Griewank function #####
-class griewank:
+class Griewank:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([600] * self.variable_num)
@@ -1101,7 +1103,7 @@ class griewank:
         plt.show()
 
 ##### Class Michalewicz function #####
-class michalewicz:
+class Michalewicz:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([np.pi] * self.variable_num)
@@ -1144,7 +1146,7 @@ class michalewicz:
         plt.show()
 
 ##### Class Perm function #####
-class perm:
+class Perm:
     def __init__(self,variable_num,beta):
         self.variable_num = variable_num
         self.beta = beta
@@ -1194,7 +1196,7 @@ class perm:
         plt.show()
 
 ##### Class Rastrigin function #####
-class rastrigin:
+class Rastrigin:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([5.12] * self.variable_num)
@@ -1237,7 +1239,7 @@ class rastrigin:
         plt.show()
 
 ##### Class Schwefel function #####
-class schwefel:
+class Schwefel:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([500] * self.variable_num)
@@ -1279,7 +1281,7 @@ class schwefel:
         plt.show()
 
 ##### Class Six-hump camel function #####
-class sixHumpCamel:
+class SixHumpCamel:
     def __init__(self):
         self.variable_num = 2
         self.max_search_range = np.array([3,2])
@@ -1318,7 +1320,7 @@ class sixHumpCamel:
         plt.show()
 
 ##### Class Shuberts function #####
-class shuberts:
+class Shuberts:
     def __init__(self):
         self.variable_num = 2
         self.max_search_range = np.array([1000,10]) # Set infinite as 1000 for x1
@@ -1363,7 +1365,7 @@ class shuberts:
         plt.show()
 
 ##### Class Xin-She Yang function #####
-class xinSheYang:
+class XinSheYang:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([2*np.pi]*self.variable_num) # Set infinite as 1000 for x1
@@ -1407,7 +1409,7 @@ class xinSheYang:
         plt.show()
 
 ##### Class Zakharov function #####
-class zakharov:
+class Zakharov:
     def __init__(self,variable_num):
         self.variable_num = variable_num
         self.max_search_range = np.array([1000]*self.variable_num) # temporarily set as 1000
