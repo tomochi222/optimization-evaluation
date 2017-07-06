@@ -6,7 +6,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-__all__ = []
+__all__ =  ['Ackley','Sphere','Rosenbrock','Beale','GoldsteinPrice','Booth',
+            'BukinN6','Matyas','LeviN13','ThreeHumpCamel','Easom','Eggholder',
+            'McCormick','SchafferN2','SchafferN4','StyblinskiTang','DeJongsF1',
+            'DeJongsF2','DeJongsF3','DeJongsF4','DeJongsF5','Ellipsoid','KTablet',
+            'FiveWellPotential','WeightedSphere','HyperEllipsodic',
+            'SumOfDifferentPower','Griewank','Michalewicz','Perm','Rastrigin',
+            'Schwefel','SixHumpCamel','Shuberts','XinSheYang','Zakharov']
 
 ##### Optimization benchmark function group #####
 ##### Class Ackley function #####
