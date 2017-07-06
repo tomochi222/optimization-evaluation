@@ -1018,7 +1018,7 @@ class WeightedSphere:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
-class HyperEllipsodic(weightedSphere):
+class HyperEllipsodic(WeightedSphere):
     def __init__(self,variable_num):
         super().__init__(variable_num)
 
