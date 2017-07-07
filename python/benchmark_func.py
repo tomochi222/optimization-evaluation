@@ -257,89 +257,34 @@ class SchafferN2(OptimalBasic):
         return 0.5+tmp1/tmp2
 
 ##### Class Schaffer function N.4 #####
-class SchafferN4:
+class SchafferN4(OptimalBasic):
     def __init__(self):
-        self.variable_num = 2
-        self.max_search_range = np.array([100,100])
-        self.min_search_range = np.array([-100,-100])
-        self.optimal_solution = np.array([0,1.25313])
+        super().__init__(2)
+        self.max_search_range = np.array([100.]*self.variable_num)
+        self.min_search_range = np.array([-100]*self.variable_num)
+        self.optimal_solution = np.array([0.,1.25313])
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
+        self.plot_place = 10
 
     def get_func_val(self, variables):
         tmp1 = np.power(np.cos(np.sin(np.absolute(np.power(variables[0],2)-np.power(variables[1],2)))),2)-0.5
         tmp2 = np.power(1+0.001*(np.power(variables[0],2)+np.power(variables[1],2)),2)
         return 0.5+tmp1/tmp2
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range[0],self.max_search_range[0], 1)
-            y = np.arange(self.min_search_range[1],self.max_search_range[1], 1)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
 ##### Class Styblinski-Tang function #####
-class StyblinskiTang:
+class StyblinskiTang(OptimalBasic):
     def __init__(self,variable_num):
-        self.variable_num = variable_num
-        self.max_search_range = np.array([5] * variable_num)
-        self.min_search_range = np.array([-5] * variable_num)
-        self.optimal_solution = np.array([-2.903534] * variable_num)
+        super().__init__(variable_num)
+        self.max_search_range = np.array([5.]*self.variable_num)
+        self.min_search_range = np.array([-5.]*self.variable_num)
+        self.optimal_solution = np.array([-2.903534]*self.variable_num)
         self.global_optimum_solution = -39.166165*self.variable_num
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
 
     def get_func_val(self, variables):
         tmp1 = 0
         for i in range(self.variable_num):
         	tmp1 += np.power(variables[i],4)-16*np.power(variables[i],2)+5*variables[i]
         return tmp1/2
-
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
-            y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
 
 ##### Class De Jong's function F1 #####
 class DeJongsF1(Sphere):
