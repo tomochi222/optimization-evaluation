@@ -14,15 +14,15 @@ __all__ =  ['Ackley','Sphere','Rosenbrock','Beale','GoldsteinPrice','Booth',
             'SumOfDifferentPower','Griewank','Michalewicz','Perm','Rastrigin',
             'Schwefel','SixHumpCamel','Shuberts','XinSheYang','Zakharov']
 
-##### Optimization benchmark function group #####
-##### Class Ackley function #####
-class Ackley:
+##### Basic function #####
+class OptimalBasic:
     def __init__(self, variable_num):
         self.variable_num = variable_num
-        self.max_search_range = 32.768
-        self.min_search_range = -32.768
-        self.optimal_solution = np.zeros((1,self.variable_num))
+        self.max_search_range = np.array([0]*self.variable_num)
+        self.min_search_range = np.array([0]*self.variable_num)
+        self.optimal_solution = np.array([0]*self.variable_num)
         self.global_optimum_solution = 0
+        self.plot_place = 0.25
 
     def get_global_optimum_solution(self):
         return self.global_optimum_solution
@@ -34,26 +34,41 @@ class Ackley:
         return [self.max_search_range, self.min_search_range]
 
     def get_func_val(self, variables):
-        return 20-20*np.exp(-0.2*np.sqrt(1/self.variable_num*np.sum(np.square(variables)))+np.e-np.exp(1/self.variable_num*np.sum(np.cos(variables*2*np.pi))))
+        return -1
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            y = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
+    def plot(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], self.plot_place, dtype=np.float32)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], self.plot_place, dtype=np.float32)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(np.array(tmp)))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.show()
+
+
+##### Optimization benchmark function group #####
+##### Class Ackley function #####
+class Ackley(OptimalBasic):
+    def __init__(self,variable_num):
+        super().__init__(variable_num)
+        self.max_search_range = np.array([32.768]*self.variable_num)
+        self.min_search_range = np.array([-32.768]*self.variable_num)
+        self.optimal_solution = np.array([0]*self.variable_num)
+        self.global_optimum_solution = 0
+
+    def get_func_val(self, variables):
+        tmp1 = 20.-20.*np.exp(-0.2*np.sqrt(1./self.variable_num*np.sum(np.square(variables))))
+        tmp2 = np.e-np.exp(1./self.variable_num*np.sum(np.cos(variables*2.*np.pi)))
+        return tmp1+tmp2
 
 ##### Class Sphere function #####
 class Sphere:

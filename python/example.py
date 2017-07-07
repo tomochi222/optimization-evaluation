@@ -5,8 +5,8 @@ import benchmark_func as bf
 
 def main():
     print(bf.__all__)
-    # test = bf.zakharov(10)
-    # test.plot_2dimension()
+    test = bf.Ackley(10)
+    test.plot()
 
 if __name__ == '__main__':
     main()
