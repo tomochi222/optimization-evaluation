@@ -71,62 +71,27 @@ class Ackley(OptimalBasic):
         return tmp1+tmp2
 
 ##### Class Sphere function #####
-class Sphere:
+class Sphere(OptimalBasic):
     def __init__(self, variable_num):
-        self.variable_num = variable_num
-        self.max_search_range = 1000 # nearly inf
-        self.min_search_range = -1000 # nearly inf
-        self.optimal_solution = np.zeros((1,self.variable_num))
+        super().__init__(variable_num)
+        self.max_search_range = np.array([1000]*self.variable_num) # nearly inf
+        self.min_search_range = np.array([-1000]*self.variable_num) # nearly inf
+        self.optimal_solution = np.array([1]*self.variable_num)
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
+        self.plot_place = 10
 
     def get_func_val(self, variables):
         return np.sum(np.square(variables))
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(-100,100, 0.25)
-            y = np.arange(-100,100, 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
 ##### Class Rosenbrock function #####
-class Rosenbrock:
+class Rosenbrock(OptimalBasic):
     def __init__(self, variable_num):
-        self.variable_num = variable_num
-        self.max_search_range = 5
-        self.min_search_range = -5
-        self.optimal_solution = np.ones((1,self.variable_num))
+        super().__init__(variable_num)
+        self.max_search_range = np.array([5]*self.variable_num) # nearly inf
+        self.min_search_range = np.array([-5]*self.variable_num) # nearly inf
+        self.optimal_solution = np.array([1]*self.variable_num)
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
+        self.plot_place = 0.25
 
     def get_func_val(self, variables):
         f = 0
@@ -134,67 +99,21 @@ class Rosenbrock:
             f += 100*np.power(variables[i+1]-np.power(variables[i],2),2)+np.power(variables[i]-1,2)
         return f
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            y = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
 ##### Class Beale function #####
-class Beale:
+class Beale(OptimalBasic):
     def __init__(self):
-        self.variable_num = 2
-        self.max_search_range = 4.5
-        self.min_search_range = -4.5
-        self.optimal_solution = np.array([3,0.5])
+        super().__init__(2)
+        self.max_search_range = np.array([4.5]*self.variable_num) # nearly inf
+        self.min_search_range = np.array([-4.5]*self.variable_num) # nearly inf
+        self.optimal_solution = np.array([3.,0.5])
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
+        self.plot_place = 0.25
 
     def get_func_val(self, variables):
         tmp1 = np.power(1.5 - variables[0] + variables[0] * variables[1],2)
         tmp2 = np.power(2.25 - variables[0] + variables[0] * np.power(variables[1],2),2)
         tmp3 = np.power(2.625 - variables[0] + variables[0] * np.power(variables[1],3),2)
         return tmp1+tmp2+tmp3
-
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            y = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
 
 ##### Class Goldstein-Price function #####
 class GoldsteinPrice:
