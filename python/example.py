@@ -5,7 +5,7 @@ import benchmark_func as bf
 
 def main():
     print(bf.__all__)
-    test = bf.Beale()
+    test = bf.Matyas()
     test.plot()
 
 if __name__ == '__main__':

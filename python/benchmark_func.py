@@ -87,8 +87,8 @@ class Sphere(OptimalBasic):
 class Rosenbrock(OptimalBasic):
     def __init__(self, variable_num):
         super().__init__(variable_num)
-        self.max_search_range = np.array([5]*self.variable_num) # nearly inf
-        self.min_search_range = np.array([-5]*self.variable_num) # nearly inf
+        self.max_search_range = np.array([5]*self.variable_num)
+        self.min_search_range = np.array([-5]*self.variable_num)
         self.optimal_solution = np.array([1]*self.variable_num)
         self.global_optimum_solution = 0
         self.plot_place = 0.25
@@ -103,8 +103,8 @@ class Rosenbrock(OptimalBasic):
 class Beale(OptimalBasic):
     def __init__(self):
         super().__init__(2)
-        self.max_search_range = np.array([4.5]*self.variable_num) # nearly inf
-        self.min_search_range = np.array([-4.5]*self.variable_num) # nearly inf
+        self.max_search_range = np.array([4.5]*self.variable_num)
+        self.min_search_range = np.array([-4.5]*self.variable_num)
         self.optimal_solution = np.array([3.,0.5])
         self.global_optimum_solution = 0
         self.plot_place = 0.25
@@ -116,176 +116,61 @@ class Beale(OptimalBasic):
         return tmp1+tmp2+tmp3
 
 ##### Class Goldstein-Price function #####
-class GoldsteinPrice:
+class GoldsteinPrice(OptimalBasic):
     def __init__(self):
-        self.variable_num = 2
-        self.max_search_range = 2
-        self.min_search_range = -2
-        self.optimal_solution = np.array([0,-1])
+        super().__init__(2)
+        self.max_search_range = np.array([2.]*self.variable_num)
+        self.min_search_range = np.array([-2.]*self.variable_num)
+        self.optimal_solution = np.array([0.,-1.])
         self.global_optimum_solution = 3
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
+        self.plot_place = 0.25
 
     def get_func_val(self, variables):
         tmp1 = (1+np.power(variables[0]+variables[1]+1,2)*(19-14*variables[0]+3*np.power(variables[0],2)-14*variables[1]+6*variables[0]*variables[1]+3*np.power(variables[1],2)))
         tmp2 = (30+(np.power(2*variables[0]-3*variables[1],2)*(18-32*variables[0]+12*np.power(variables[0],2)+48*variables[1]-36*variables[0]*variables[1]+27*np.power(variables[1],2))))
         return tmp1*tmp2
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            y = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
 ##### Class Booth function #####
-class Booth:
+class Booth(OptimalBasic):
     def __init__(self):
-        self.variable_num = 2
-        self.max_search_range = 10
-        self.min_search_range = -10
-        self.optimal_solution = np.array([1,-3])
+        super().__init__(2)
+        self.max_search_range = np.array([10.]*self.variable_num)
+        self.min_search_range = np.array([-10.]*self.variable_num)
+        self.optimal_solution = np.array([1.,-3.])
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
 
     def get_func_val(self, variables):
         tmp1 = np.power(variables[0]+2*variables[1]-7,2)
         tmp2 = np.power(2*variables[0]+variables[1]-5,2)
         return tmp1+tmp2
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            y = np.arange(self.min_search_range,self.max_search_range, 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
 ##### Class Bukin function N.6 #####
-class BukinN6:
+class BukinN6(OptimalBasic):
     def __init__(self):
-        self.variable_num = 2
-        self.max_search_range = np.array([-5,3])
-        self.min_search_range = np.array([-15,-3])
-        self.optimal_solution = np.array([-10,1])
+        super().__init__(2)
+        self.max_search_range = np.array([-5.,3.])
+        self.min_search_range = np.array([-15.,-3.])
+        self.optimal_solution = np.array([-10.,1.])
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
 
     def get_func_val(self, variables):
         tmp1 = 100*np.sqrt(np.absolute(variables[1]-0.01*np.power(variables[1],2)))
         tmp2 = 0.01*np.absolute(variables[0]+10)
         return tmp1+tmp2
 
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
-            y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
 ##### Class Matyas function #####
-class Matyas:
+class Matyas(OptimalBasic):
     def __init__(self):
-        self.variable_num = 2
-        self.max_search_range = np.array([10,10])
-        self.min_search_range = np.array([-10,-10])
-        self.optimal_solution = np.array([0,0])
+        super().__init__(2)
+        self.max_search_range = np.array([10.]*self.variable_num) # nearly inf
+        self.min_search_range = np.array([-10.]*self.variable_num) # nearly inf
+        self.optimal_solution = np.array([0.,0.])
         self.global_optimum_solution = 0
-
-    def get_global_optimum_solution(self):
-        return self.global_optimum_solution
-
-    def get_optimal_solution(self):
-        return self.optimal_solution
-
-    def get_search_range(self):
-        return [self.max_search_range, self.min_search_range]
 
     def get_func_val(self, variables):
         tmp1 = 0.26*(np.power(variables[0],2)+np.power(variables[1],2))
         tmp2 = 0.48*variables[0]*variables[1]
         return tmp1-tmp2
-
-    def plot_2dimension(self):
-        if self.variable_num == 2:
-            x = np.arange(self.min_search_range[0],self.max_search_range[0], 0.25)
-            y = np.arange(self.min_search_range[1],self.max_search_range[1], 0.25)
-            X, Y = np.meshgrid(x,y)
-            Z = []
-            for xy_list in zip(X,Y):
-                z = []
-                for xy_input in zip(xy_list[0],xy_list[1]):
-                    z.append(self.get_func_val(np.array(xy_input)))
-                Z.append(z)
-            Z = np.array(Z)
-            fig = plt.figure()
-            ax = Axes3D(fig)
-            ax.plot_wireframe(X,Y,Z)
-            plt.show()
-        else:
-            print('This method only can use for 2 variables')
-
-def main():
-    benchmark_func = Matyas()
-    benchmark_func.plot_2dimension()
 
 ##### Class Levi function N.13 #####
 class LeviN13:
