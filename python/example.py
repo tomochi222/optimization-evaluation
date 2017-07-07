@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-import benchmark_func as bf
+from benchmark_func as bf
 
 def main():
     print(bf.__all__)
