@@ -1,6 +1,6 @@
 # coding: utf-8
 from setuptools import setup, find_packages
-from optimization_evaluation import __author__, __version__, __license__
+from opteval import __author__, __version__, __license__
 
 # To use a consistent encoding
 from codecs import open
@@ -13,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-        name             = 'optimization_evaluation',
+        name             = 'opteval',
         version          = __version__,
         description      = 'A library to support the benchmarking of functions for optimization evaluation, similar to algorithm-test',
         long_description = long_description,
