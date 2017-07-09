@@ -14,6 +14,18 @@ __all__ =  ['Ackley','Sphere','Rosenbrock','Beale','GoldsteinPrice','Booth',
             'SumOfDifferentPower','Griewank','Michalewicz','Perm','Rastrigin',
             'Schwefel','SixHumpCamel','Shuberts','XinSheYang','Zakharov']
 
+__oneArgument__ = ['Beale','GoldsteinPrice','Booth','BukinN6','Matyas','LeviN13',
+                   'ThreeHumpCamel','Easom','Eggholder','McCormick','SchafferN2',
+                   'SchafferN4','DeJongsF3','DeJongsF4','DeJongsF5',
+                   'FiveWellPotential','SixHumpCamel','Shuberts']
+
+__twoArgument__ = ['Ackley','Sphere','Rosenbrock','StyblinskiTang','DeJongsF1',
+                   'DeJongsF2','Ellipsoid','KTablet','WeightedSphere',
+                   'HyperEllipsodic','SumOfDifferentPower','Griewank',
+                   'Michalewicz','Rastrigin','Schwefel','XinSheYang','Zakharov']
+
+__threeArgument__ = ['Perm']
+
 ##### Basic function #####
 class OptimalBasic:
     def __init__(self, variable_num):
@@ -53,7 +65,6 @@ class OptimalBasic:
         ax = Axes3D(fig)
         ax.plot_wireframe(X,Y,Z)
         plt.show()
-
 
 ##### Optimization benchmark function group #####
 ##### Class Ackley function #####
