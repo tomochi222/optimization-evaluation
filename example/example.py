@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-from benchmark_func as bf
+from opteval import benchmark_func as bf
 
 def main():
     print(bf.__all__)

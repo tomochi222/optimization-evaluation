@@ -1,4 +1,4 @@
-# benchmark function group
+# A set of benchmark function
 
 A library to support the benchmarking of functions for optimization evaluation, similar to algorithm-test.
 
@@ -65,8 +65,7 @@ This is a benchmark function group for optimization algorithm evaluation.
 ## Installation/Requirement
 
 ### python 3.XX
-	$ git clone https://github.com/keit0222/benchmark-function-group-for-optimization-algorithm-evaluation.git
-	$ cd benchmark-function-group/python
+	$ pip install git+https://github.com/keit0222/optimization-evaluation.git
 
 ## Usage
 

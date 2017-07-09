@@ -1,8 +1,8 @@
 
 # coding : utf-8
 
-from benchmark_func import *
-import benchmark_func as bf
+from opteval.benchmark_func import *
+import opteval.benchmark_func as bf
 
 def main():
     print('Available function list is \n', bf.__all__)
