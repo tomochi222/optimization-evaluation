@@ -2,10 +2,21 @@
 from setuptools import setup, find_packages
 from optimization_evaluation import __author__, __version__, __license__
 
+# To use a consistent encoding
+from codecs import open
+from os import path
+
+here = path.abspath(path.dirname(__file__))
+
+# Get the long description from the README file
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
         name             = 'optimization_evaluation',
         version          = __version__,
         description      = 'A library to support the benchmarking of functions for optimization evaluation, similar to algorithm-test',
+        long_description = long_description,
         license          = __license__,
         author           = __author__,
         author_email     = 'tomochika.keita.tz1@is.naist.jp',
