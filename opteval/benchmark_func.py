@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import sys
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -36,7 +37,9 @@ class OptimalBasic:
         self.global_optimum_solution = 0
         self.plot_place = 0.25
         self.func_name = ''
-
+        self.save_dir = os.path.dirname(os.path.abspath(__file__))+'\\img\\'
+        if(os.path.isdir(self.save_dir) == False):
+            os.mkdir(self.save_dir)
     def get_global_optimum_solution(self):
         return self.global_optimum_solution
 
@@ -83,7 +86,8 @@ class OptimalBasic:
         fig = plt.figure()
         ax = Axes3D(fig)
         ax.plot_wireframe(X,Y,Z)
-        plt.savefig(self.func_name+'.png')
+        plt.savefig(self.save_dir+self.func_name+'.png')
+        plt.close()
 
 ##### Optimization benchmark function group #####
 ##### Class Ackley function #####
