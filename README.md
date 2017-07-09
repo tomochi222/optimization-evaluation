@@ -67,6 +67,9 @@ This is a benchmark function group for optimization algorithm evaluation.
 ### python 3.XX
 	$ pip install git+https://github.com/keit0222/optimization-evaluation.git
 
+### upgrade library  
+  $ pip install --upgrade git+https://github.com/keit0222/optimization-evaluation.git
+
 ## Usage
 
 ### example

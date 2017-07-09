@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import sys
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -35,7 +36,10 @@ class OptimalBasic:
         self.optimal_solution = np.array([0]*self.variable_num)
         self.global_optimum_solution = 0
         self.plot_place = 0.25
-
+        self.func_name = ''
+        self.save_dir = os.path.dirname(os.path.abspath(__file__))+'\\img\\'
+        if(os.path.isdir(self.save_dir) == False):
+            os.mkdir(self.save_dir)
     def get_global_optimum_solution(self):
         return self.global_optimum_solution
 
@@ -66,6 +70,25 @@ class OptimalBasic:
         ax.plot_wireframe(X,Y,Z)
         plt.show()
 
+    def save_fig(self):
+        x = np.arange(self.min_search_range[0],self.max_search_range[0], self.plot_place, dtype=np.float32)
+        y = np.arange(self.min_search_range[1],self.max_search_range[1], self.plot_place, dtype=np.float32)
+        X, Y = np.meshgrid(x,y)
+        Z = []
+        for xy_list in zip(X,Y):
+            z = []
+            for xy_input in zip(xy_list[0],xy_list[1]):
+                tmp = list(xy_input)
+                tmp.extend(list(self.optimal_solution[0:self.variable_num-2]))
+                z.append(self.get_func_val(np.array(tmp)))
+            Z.append(z)
+        Z = np.array(Z)
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        ax.plot_wireframe(X,Y,Z)
+        plt.savefig(self.save_dir+self.func_name+'.png')
+        plt.close()
+
 ##### Optimization benchmark function group #####
 ##### Class Ackley function #####
 class Ackley(OptimalBasic):
@@ -75,6 +98,7 @@ class Ackley(OptimalBasic):
         self.min_search_range = np.array([-32.768]*self.variable_num)
         self.optimal_solution = np.array([0]*self.variable_num)
         self.global_optimum_solution = 0
+        self.func_name = 'Ackley'
 
     def get_func_val(self, variables):
         tmp1 = 20.-20.*np.exp(-0.2*np.sqrt(1./self.variable_num*np.sum(np.square(variables))))
@@ -90,6 +114,7 @@ class Sphere(OptimalBasic):
         self.optimal_solution = np.array([1]*self.variable_num)
         self.global_optimum_solution = 0
         self.plot_place = 10
+        self.func_name = 'Sphere'
 
     def get_func_val(self, variables):
         return np.sum(np.square(variables))
@@ -103,6 +128,7 @@ class Rosenbrock(OptimalBasic):
         self.optimal_solution = np.array([1]*self.variable_num)
         self.global_optimum_solution = 0
         self.plot_place = 0.25
+        self.func_name = 'Rosenbrock'
 
     def get_func_val(self, variables):
         f = 0
@@ -119,6 +145,7 @@ class Beale(OptimalBasic):
         self.optimal_solution = np.array([3.,0.5])
         self.global_optimum_solution = 0
         self.plot_place = 0.25
+        self.func_name = 'Beale'
 
     def get_func_val(self, variables):
         tmp1 = np.power(1.5 - variables[0] + variables[0] * variables[1],2)
@@ -135,6 +162,7 @@ class GoldsteinPrice(OptimalBasic):
         self.optimal_solution = np.array([0.,-1.])
         self.global_optimum_solution = 3
         self.plot_place = 0.25
+        self.func_name = 'GoldsteinPrice'
 
     def get_func_val(self, variables):
         tmp1 = (1+np.power(variables[0]+variables[1]+1,2)*(19-14*variables[0]+3*np.power(variables[0],2)-14*variables[1]+6*variables[0]*variables[1]+3*np.power(variables[1],2)))
@@ -149,6 +177,7 @@ class Booth(OptimalBasic):
         self.min_search_range = np.array([-10.]*self.variable_num)
         self.optimal_solution = np.array([1.,-3.])
         self.global_optimum_solution = 0
+        self.func_name = 'Booth'
 
     def get_func_val(self, variables):
         tmp1 = np.power(variables[0]+2*variables[1]-7,2)
@@ -163,6 +192,7 @@ class BukinN6(OptimalBasic):
         self.min_search_range = np.array([-15.,-3.])
         self.optimal_solution = np.array([-10.,1.])
         self.global_optimum_solution = 0
+        self.func_name = 'BukinN6'
 
     def get_func_val(self, variables):
         tmp1 = 100*np.sqrt(np.absolute(variables[1]-0.01*np.power(variables[1],2)))
@@ -177,6 +207,7 @@ class Matyas(OptimalBasic):
         self.min_search_range = np.array([-10.]*self.variable_num)
         self.optimal_solution = np.array([0.,0.])
         self.global_optimum_solution = 0
+        self.func_name = 'Matyas'
 
     def get_func_val(self, variables):
         tmp1 = 0.26*(np.power(variables[0],2)+np.power(variables[1],2))
@@ -191,6 +222,7 @@ class LeviN13(OptimalBasic):
         self.min_search_range = np.array([-10.]*self.variable_num)
         self.optimal_solution = np.array([1.,1.])
         self.global_optimum_solution = 0
+        self.func_name = 'LeviN13'
 
     def get_func_val(self, variables):
         tmp1 = np.power(np.sin(3*np.pi*variables[0]),2)
@@ -206,6 +238,7 @@ class ThreeHumpCamel(OptimalBasic):
         self.min_search_range = np.array([-5.]*self.variable_num)
         self.optimal_solution = np.array([0.,0.])
         self.global_optimum_solution = 0
+        self.func_name = 'ThreeHumpCamel'
 
     def get_func_val(self, variables):
         return 2*np.power(variables[0],2)-1.05*np.power(variables[0],4)+np.power(variables[0],6)/6+variables[0]*variables[1]+np.power(variables[1],2)
@@ -219,6 +252,7 @@ class Easom(OptimalBasic):
         self.optimal_solution = np.array([np.pi,np.pi])
         self.global_optimum_solution = -1
         self.plot_place = 10
+        self.func_name = 'Easom'
 
     def get_func_val(self, variables):
         return -1.0*np.cos(variables[0])*np.cos(variables[1])*np.exp(-(np.power(variables[0]-np.pi,2)+np.power(variables[1]-np.pi,2)))
@@ -232,6 +266,7 @@ class Eggholder(OptimalBasic):
         self.optimal_solution = np.array([512.,404.2319])
         self.global_optimum_solution = -959.6407
         self.plot_place = 5
+        self.func_name = 'Eggholder'
 
     def get_func_val(self, variables):
         tmp1 = -(variables[1]+47)*np.sin(np.sqrt(np.absolute(variables[1]+variables[0]/2+47)))
@@ -246,6 +281,7 @@ class McCormick(OptimalBasic):
         self.min_search_range = np.array([-1.5,-3.])
         self.optimal_solution = np.array([-0.54719,-1.54719])
         self.global_optimum_solution = -1.9133
+        self.func_name = 'McCormick'
 
     def get_func_val(self, variables):
         tmp1 = np.sin(variables[0]+variables[1])+np.power(variables[0]-variables[1],2)
@@ -261,6 +297,7 @@ class SchafferN2(OptimalBasic):
         self.optimal_solution = np.array([0.,0.])
         self.global_optimum_solution = 0
         self.plot_place = 10
+        self.func_name = 'SchafferN2'
 
     def get_func_val(self, variables):
         tmp1 = np.power(np.sin(np.power(variables[0],2)-np.power(variables[1],2)),2)-0.5
@@ -276,6 +313,7 @@ class SchafferN4(OptimalBasic):
         self.optimal_solution = np.array([0.,1.25313])
         self.global_optimum_solution = 0
         self.plot_place = 10
+        self.func_name = 'SchafferN4'
 
     def get_func_val(self, variables):
         tmp1 = np.power(np.cos(np.sin(np.absolute(np.power(variables[0],2)-np.power(variables[1],2)))),2)-0.5
@@ -290,6 +328,7 @@ class StyblinskiTang(OptimalBasic):
         self.min_search_range = np.array([-5.]*self.variable_num)
         self.optimal_solution = np.array([-2.903534]*self.variable_num)
         self.global_optimum_solution = -39.166165*self.variable_num
+        self.func_name = 'StyblinskiTang'
 
     def get_func_val(self, variables):
         tmp1 = 0
@@ -301,11 +340,13 @@ class StyblinskiTang(OptimalBasic):
 class DeJongsF1(Sphere):
     def __init__(self,variable_num):
         super().__init__(variable_num)
+        self.func_name = 'DeJongsF1'
 
 ##### Class De Jong's function F2 #####
 class DeJongsF2(Rosenbrock):
     def __init__(self,variable_num):
         super().__init__(variable_num)
+        self.func_name = 'DeJongsF2'
 
 ##### Class De Jong's function F3 #####
 class DeJongsF3(OptimalBasic):
@@ -315,6 +356,7 @@ class DeJongsF3(OptimalBasic):
         self.min_search_range = np.array([-5.12]*self.variable_num)
         self.optimal_solution = np.array([-5.12]*self.variable_num)
         self.global_optimum_solution = 0
+        self.func_name = 'DeJongsF3'
 
     def get_func_val(self, variables):
         tmp1 = 0
@@ -330,6 +372,7 @@ class DeJongsF4(OptimalBasic):
         self.min_search_range = np.array([-1.28]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = np.random.normal(0,1)
+        self.func_name = 'DeJongsF4'
 
     def get_func_val(self, variables):
         tmp1 = 0
@@ -346,6 +389,7 @@ class DeJongsF5(OptimalBasic):
         self.optimal_solution = np.array([-32.32]*self.variable_num)
         self.global_optimum_solution = 1.
         self.plot_place = 1.5
+        self.func_name = 'DeJongsF5'
 
     def get_func_val(self, variables):
         A = np.zeros([2,25])
@@ -376,6 +420,7 @@ class Ellipsoid(OptimalBasic):
         self.min_search_range = np.array([-5.12]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
+        self.func_name = 'Ellipsoid'
 
     def get_func_val(self, variables):
         tmp = 0
@@ -391,6 +436,7 @@ class KTablet(OptimalBasic):
         self.min_search_range = np.array([-5.12]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
+        self.func_name = 'KTablet'
 
     def get_func_val(self, variables):
         tmp = 0
@@ -412,6 +458,7 @@ class FiveWellPotential(OptimalBasic):
         self.optimal_solution = np.array([4.92,-9.89])
         self.global_optimum_solution = -1.4616
         self.plot_place = 1
+        self.func_name = 'FiveWellPotential'
 
     def get_func_val(self, variables):
         tmp1 = []
@@ -434,6 +481,7 @@ class WeightedSphere(OptimalBasic):
         self.min_search_range = np.array([-5.12]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
+        self.func_name = 'WeightedSphere'
 
     def get_func_val(self, variables):
         tmp = 0
@@ -444,6 +492,7 @@ class WeightedSphere(OptimalBasic):
 class HyperEllipsodic(WeightedSphere):
     def __init__(self,variable_num):
         super().__init__(variable_num)
+        self.func_name = 'HyperEllipsodic'
 
 ##### Class Sum of different power function #####
 class SumOfDifferentPower(OptimalBasic):
@@ -453,6 +502,7 @@ class SumOfDifferentPower(OptimalBasic):
         self.min_search_range = np.array([-1.]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
+        self.func_name = 'SumOfDifferentPower'
 
     def get_func_val(self, variables):
         tmp = 0
@@ -469,6 +519,7 @@ class Griewank(OptimalBasic):
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
         self.plot_place = 10.
+        self.func_name = 'Griewank'
 
     def get_func_val(self, variables):
         tmp1 = 0
@@ -487,6 +538,7 @@ class Michalewicz(OptimalBasic):
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = -1.8013 # In case of variable_num == 2
         self.plot_place = 0.1
+        self.func_name = 'Michalewicz'
 
     def get_func_val(self, variables):
         m = 10
@@ -508,6 +560,7 @@ class Perm(OptimalBasic):
         self.optimal_solution = np.array(tmp)
         self.global_optimum_solution = 0.
         self.plot_place = 0.1
+        self.func_name = 'Perm'
 
     def get_func_val(self, variables):
         tmp1 = 0
@@ -527,6 +580,7 @@ class Rastrigin(OptimalBasic):
         self.min_search_range = np.array([-5.12]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
+        self.func_name = 'Rastrigin'
 
     def get_func_val(self, variables):
         tmp1 = 10 * self.variable_num
@@ -544,6 +598,7 @@ class Schwefel(OptimalBasic):
         self.optimal_solution = np.array([420.9687]*self.variable_num)
         self.global_optimum_solution = -418.9829
         self.plot_place = 10.
+        self.func_name = 'Schwefel'
 
     def get_func_val(self, variables):
         tmp = 0
@@ -559,6 +614,7 @@ class SixHumpCamel(OptimalBasic):
         self.min_search_range = np.array([-3.,-2.])
         self.optimal_solution = np.array([-0.0898,0.7126])
         self.global_optimum_solution = -1.0316
+        self.func_name = 'SixHumpCamel'
 
     def get_func_val(self, variables):
         return 4-2.1*np.power(variables[0],2)+1/3*np.power(variables[0],4)*np.power(variables[0],2)+variables[0]*variables[1]+4*(np.power(variables[1],2)-1)*np.power(variables[1],2)
@@ -572,6 +628,7 @@ class Shuberts(OptimalBasic):
         self.optimal_solution = np.array([0.,0.])
         self.global_optimum_solution = -186.7309
         self.plot_place = 10.
+        self.func_name = 'Shuberts'
 
     def get_func_val(self, variables):
         n = 5
@@ -590,6 +647,7 @@ class XinSheYang(OptimalBasic):
         self.min_search_range = np.array([-2.*np.pi]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
+        self.func_name = 'XinSheYang'
 
     def get_func_val(self, variables):
         tmp1 = 0
@@ -608,6 +666,7 @@ class Zakharov(OptimalBasic):
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
         self.plot_place = 10.
+        self.func_name = 'Zakharov'
 
     def get_func_val(self, variables):
         tmp1 = 0
