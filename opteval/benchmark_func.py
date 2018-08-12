@@ -17,13 +17,13 @@ __all__ =  ['Ackley','Sphere','Rosenbrock','Beale','GoldsteinPrice','Booth',
 
 __oneArgument__ = ['Beale','GoldsteinPrice','Booth','BukinN6','Matyas','LeviN13',
                    'ThreeHumpCamel','Easom','Eggholder','McCormick','SchafferN2',
-                   'SchafferN4','DeJongsF3','DeJongsF4','DeJongsF5',
-                   'FiveWellPotential','SixHumpCamel','Shuberts']
+                   'SchafferN4', 'FiveWellPotential','SixHumpCamel','Shuberts']
 
 __twoArgument__ = ['Ackley','Sphere','Rosenbrock','StyblinskiTang','DeJongsF1',
-                   'DeJongsF2','Ellipsoid','KTablet','WeightedSphere',
-                   'HyperEllipsodic','SumOfDifferentPower','Griewank',
-                   'Michalewicz','Rastrigin','Schwefel','XinSheYang','Zakharov']
+                   'DeJongsF2','DeJongsF3','DeJongsF4','DeJongsF5','Ellipsoid',
+                   'KTablet','WeightedSphere','HyperEllipsodic',
+                   'SumOfDifferentPower','Griewank','Michalewicz','Rastrigin',
+                   'Schwefel','XinSheYang','Zakharov']
 
 __threeArgument__ = ['Perm']
 
@@ -109,8 +109,8 @@ class Ackley(OptimalBasic):
 class Sphere(OptimalBasic):
     def __init__(self, variable_num):
         super().__init__(variable_num)
-        self.max_search_range = np.array([1000]*self.variable_num) # nearly inf
-        self.min_search_range = np.array([-1000]*self.variable_num) # nearly inf
+        self.max_search_range = np.array([5.12]*self.variable_num) # nearly inf
+        self.min_search_range = np.array([-5.12]*self.variable_num) # nearly inf
         self.optimal_solution = np.array([1]*self.variable_num)
         self.global_optimum_solution = 0
         self.plot_place = 10
@@ -175,7 +175,7 @@ class Booth(OptimalBasic):
         super().__init__(2)
         self.max_search_range = np.array([10.]*self.variable_num)
         self.min_search_range = np.array([-10.]*self.variable_num)
-        self.optimal_solution = np.array([1.,-3.])
+        self.optimal_solution = np.array([1.,3.])
         self.global_optimum_solution = 0
         self.func_name = 'Booth'
 
@@ -350,8 +350,8 @@ class DeJongsF2(Rosenbrock):
 
 ##### Class De Jong's function F3 #####
 class DeJongsF3(OptimalBasic):
-    def __init__(self):
-        super().__init__(5)
+    def __init__(self,variable_num):
+        super().__init__(variable_num)
         self.max_search_range = np.array([5.12]*self.variable_num)
         self.min_search_range = np.array([-5.12]*self.variable_num)
         self.optimal_solution = np.array([-5.12]*self.variable_num)
@@ -359,15 +359,15 @@ class DeJongsF3(OptimalBasic):
         self.func_name = 'DeJongsF3'
 
     def get_func_val(self, variables):
-        tmp1 = 0
+        tmp1 = 6*self.variable_num
         for i in range(self.variable_num):
         	tmp1 += np.floor(variables[i])
         return tmp1
 
 ##### Class De Jong's function F4 #####
 class DeJongsF4(OptimalBasic):
-    def __init__(self):
-        super().__init__(30)
+    def __init__(self,variable_num):
+        super().__init__(variable_num)
         self.max_search_range = np.array([1.28]*self.variable_num)
         self.min_search_range = np.array([-1.28]*self.variable_num)
         self.optimal_solution = np.array([0.]*self.variable_num)
@@ -377,13 +377,13 @@ class DeJongsF4(OptimalBasic):
     def get_func_val(self, variables):
         tmp1 = 0
         for i in range(self.variable_num):
-        	tmp1 += (i+1)*np.power(variables[i],4)
+        	tmp1 += np.power(variables[i],4)
         return tmp1 + np.random.normal(0, 1)
 
 ##### Class De Jong's function F5 #####
 class DeJongsF5(OptimalBasic):
-    def __init__(self):
-        super().__init__(25)
+    def __init__(self,variable_num):
+        super().__init__(variable_num)
         self.max_search_range = np.array([65.536]*self.variable_num)
         self.min_search_range = np.array([-65.536]*self.variable_num)
         self.optimal_solution = np.array([-32.32]*self.variable_num)
@@ -596,15 +596,15 @@ class Schwefel(OptimalBasic):
         self.max_search_range = np.array([500.]*self.variable_num)
         self.min_search_range = np.array([-500.]*self.variable_num)
         self.optimal_solution = np.array([420.9687]*self.variable_num)
-        self.global_optimum_solution = -418.9829
+        self.global_optimum_solution = 0
         self.plot_place = 10.
         self.func_name = 'Schwefel'
 
     def get_func_val(self, variables):
-        tmp = 0
+        tmp = 418.9829*self.variable_num
         for i in range(self.variable_num):
-            tmp += variables[i]*np.sin(np.sqrt(np.absolute(variables[i])))
-        return -tmp
+            tmp -= variables[i]*np.sin(np.sqrt(np.absolute(variables[i])))
+        return tmp
 
 ##### Class Six-hump camel function #####
 class SixHumpCamel(OptimalBasic):
@@ -661,8 +661,8 @@ class XinSheYang(OptimalBasic):
 class Zakharov(OptimalBasic):
     def __init__(self,variable_num):
         super().__init__(variable_num)
-        self.max_search_range = np.array([1000.]*self.variable_num) # temporarily set as 1000
-        self.min_search_range = np.array([-1000]*self.variable_num) # temporarily set as -1000
+        self.max_search_range = np.array([10.]*self.variable_num) # temporarily set as 1000
+        self.min_search_range = np.array([-5]*self.variable_num) # temporarily set as -1000
         self.optimal_solution = np.array([0.]*self.variable_num)
         self.global_optimum_solution = 0.
         self.plot_place = 10.
@@ -672,6 +672,6 @@ class Zakharov(OptimalBasic):
         tmp1 = 0
         tmp2 = 0
         for i in range(self.variable_num):
-            tmp1 += variables[i]
+            tmp1 += np.power(variables[i],2)
             tmp2 += (i+1)*variables[i]
         return tmp1+np.power(1/2*tmp2,2)+np.power(1/2*tmp2,4)
